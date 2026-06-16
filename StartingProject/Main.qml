@@ -62,6 +62,7 @@ Window {
 
     Rectangle {
         border.width: 2
+        radius: root.height/96
         
         anchors {
             fill : parent
@@ -69,6 +70,7 @@ Window {
         }
 
         Rectangle {
+            radius: root.height/96
             anchors {
                fill : parent
                margins: 10
@@ -87,6 +89,7 @@ Window {
 
             Rectangle {
                 border.width: 2
+                radius: root.height/96
                 width: 0.313*parent.width
                 height: 0.313*parent.width
                 anchors.right: parent.right
@@ -101,6 +104,8 @@ Window {
             }
 
             Column {
+                id: details
+                visible: false
                 anchors.top: u_name.bottom
                 spacing: 4
 
@@ -132,6 +137,31 @@ Window {
                     id: u_website
                     text: myContactInfo.webSite
                     font.pointSize: root.height/40
+                }
+            }
+
+            Rectangle {
+                id: button
+
+                radius: root.height/12
+                border.width: 1
+                height: 0.1*root.height
+                width: 3.142857*height
+
+                anchors.left: parent.left
+                anchors.bottom: parent.bottom
+
+                Text {
+                    anchors.centerIn: parent
+
+                    text: "Details"
+                    font.pointSize: root.height/42
+                }
+
+                MouseArea {
+                    anchors.fill: parent
+
+                    onClicked: details.visible = !details.visible
                 }
             }
         }
