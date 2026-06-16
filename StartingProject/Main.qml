@@ -5,6 +5,7 @@ import QtQuick
 
 Window {
 
+    id: root
     height: 480
     width: 1.586*height
 
@@ -64,53 +65,74 @@ Window {
         
         anchors {
             fill : parent
-            margins: 50
-        }
-
-        Text {
-            visible: true
-            id: u_name
-            text: myContactInfo.name 
-            font.pointSize: 20
+            margins: 15
         }
 
         Rectangle {
-            border.width: 2
-            width: 0.313*parent.width
-            height: 0.313*parent.width
-            anchors.right: parent.right
-            Image {
-                source: "IDPhoto.png"
-                anchors.fill: parent
-                fillMode: Image.PreserveAspectFit
+            anchors {
+               fill : parent
+               margins: 10
             }
-        }
-
-        Rectangle {
-            visible: false
+           
             Text {
-                id: u_addr
-                text: myContactInfo.address
+                visible: true
+                id: u_name
+                text: myContactInfo.name 
+                font {
+                    pointSize: root.width/20
+                    bold: true
+                    capitalization: Font.AllUppercase
+                }
             }
 
-            Text {
-                id: u_country
-                text: myContactInfo.country
+            Rectangle {
+                border.width: 2
+                width: 0.313*parent.width
+                height: 0.313*parent.width
+                anchors.right: parent.right
+                Image {
+                    source: "IDPhoto.png"
+                    anchors {
+                        fill: parent
+                        margins: 5
+                    }
+                    fillMode: Image.PreserveAspectFit
+                }
             }
 
-            Text {
-                id: u_phone
-                text: myContactInfo.phone
-            }
+            Column {
+                anchors.top: u_name.bottom
+                spacing: 4
 
-            Text {
-                id: u_email
-                text: myContactInfo.email
-            }
+                Text {
+                    id: u_addr
+                    text: myContactInfo.address
+                    font.pointSize: root.height/30
+                }
 
-            Text {
-                id: u_website
-                text: myContactInfo.webSite
+                Text {
+                    id: u_country
+                    text: myContactInfo.country
+                    font.pointSize: root.height/30
+                }
+
+                Text {
+                    id: u_phone
+                    text: myContactInfo.phone
+                    font.pointSize: root.height/40
+                }
+
+                Text {
+                    id: u_email
+                    text: myContactInfo.email
+                    font.pointSize: root.height/40
+                }
+
+                Text {
+                    id: u_website
+                    text: myContactInfo.webSite
+                    font.pointSize: root.height/40
+                }
             }
         }
     }
