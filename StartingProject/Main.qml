@@ -5,11 +5,8 @@ import QtQuick
 
 Window {
 
-    // TODO: change the size to ensure it forms the standard business card ratio of approx 1:1.586
-    // HINT: you may wish to use a binding
-
-    width: 640
     height: 480
+    width: 1.586*height
 
     visible: true
     title: qsTr("Business Card")
@@ -61,4 +58,60 @@ Window {
           toggle between showing the two categories of information.
         - Use a larger font size for the name
     */
+
+    Rectangle {
+        border.width: 2
+        
+        anchors {
+            fill : parent
+            margins: 50
+        }
+
+        Text {
+            visible: true
+            id: u_name
+            text: myContactInfo.name 
+            font.pointSize: 20
+        }
+
+        Rectangle {
+            border.width: 2
+            width: 0.313*parent.width
+            height: 0.313*parent.width
+            anchors.right: parent.right
+            Image {
+                source: "IDPhoto.png"
+                anchors.fill: parent
+                fillMode: Image.PreserveAspectFit
+            }
+        }
+
+        Rectangle {
+            visible: false
+            Text {
+                id: u_addr
+                text: myContactInfo.address
+            }
+
+            Text {
+                id: u_country
+                text: myContactInfo.country
+            }
+
+            Text {
+                id: u_phone
+                text: myContactInfo.phone
+            }
+
+            Text {
+                id: u_email
+                text: myContactInfo.email
+            }
+
+            Text {
+                id: u_website
+                text: myContactInfo.webSite
+            }
+        }
+    }
 }
