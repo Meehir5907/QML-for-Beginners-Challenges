@@ -12,6 +12,14 @@ Window {
     visible: true
     title: qsTr("Business Card")
 
+    QtObject {
+        id: appTheme
+        property color mainText: Qt.rgba(0.1, 0.1, 0.1, 1.0)
+        property color btnFill: Qt.rgba(0.2, 0.5, 0.8, 1.0)
+        property color btnText: Qt.rgba(1.0, 1.0, 1.0, 1.0)
+        property color linkText: Qt.rgba(0.0, 0.4, 0.8, 1.0)
+    }
+
     component ContactInfo: QtObject {
 
         // This is a ContactInfo object which provides the properties to fill in.
@@ -60,6 +68,55 @@ Window {
         - Use a larger font size for the name
     */
 
+    component TitleText: Text {
+        color: appTheme.mainText
+        font {
+            pointSize: root.width / 20
+            bold: true
+            capitalization: Font.AllUppercase
+        }
+    }
+
+    component HeadingText: Text {
+        color: appTheme.mainText
+        font {
+            pointSize: root.height / 30
+            bold: true
+        }
+    }
+
+    component BodyText: Text {
+        color: appTheme.mainText
+        font {
+            pointSize: root.height / 40
+        }
+    }
+
+    component CardBtn: Rectangle {
+        id: btnContainer
+    
+        property alias labelText: btnTextElement.text
+        signal clicked()
+
+        radius: root.height / 12
+        border.width: 1
+        color: appTheme.btnFill
+        height: 0.1 * root.height
+        width: 3.142857 * height
+
+        Text {
+            id: btnTextElement
+            anchors.centerIn: parent
+            color: appTheme.btnText
+            font.pointSize: root.height / 42
+        }
+
+        MouseArea {
+            anchors.fill: parent
+            onClicked: btnContainer.clicked()
+        }
+    }
+
     Rectangle {
         border.width: 2
         radius: root.height/96
@@ -76,15 +133,10 @@ Window {
                margins: 10
             }
            
-            Text {
+            TitleText {
                 visible: true
                 id: u_name
                 text: myContactInfo.name 
-                font {
-                    pointSize: root.width/20
-                    bold: true
-                    capitalization: Font.AllUppercase
-                }
             }
 
             Rectangle {
@@ -109,60 +161,46 @@ Window {
                 anchors.top: u_name.bottom
                 spacing: 4
 
-                Text {
+                HeadingText {
                     id: u_addr
                     text: myContactInfo.address
-                    font.pointSize: root.height/30
                 }
 
-                Text {
+                HeadingText {
                     id: u_country
                     text: myContactInfo.country
-                    font.pointSize: root.height/30
                 }
 
-                Text {
+                BodyText {
                     id: u_phone
                     text: myContactInfo.phone
-                    font.pointSize: root.height/40
                 }
 
-                Text {
+                BodyText {
                     id: u_email
                     text: myContactInfo.email
-                    font.pointSize: root.height/40
                 }
 
-                Text {
+                BodyText {
                     id: u_website
                     text: myContactInfo.webSite
-                    font.pointSize: root.height/40
+                    color: appTheme.linkText
+
+                    MouseArea {
+                        anchors.fill: parent
+                        cursorShape: Qt.PointingHandCursor
+                        onClicked: Qt.openUrlExternally(myContactInfo.webSite)
+                    }
                 }
             }
 
-            Rectangle {
-                id: button
-
-                radius: root.height/12
-                border.width: 1
-                height: 0.1*root.height
-                width: 3.142857*height
-
-                anchors.left: parent.left
-                anchors.bottom: parent.bottom
-
-                Text {
-                    anchors.centerIn: parent
-
-                    text: "Details"
-                    font.pointSize: root.height/42
+            CardBtn {
+                anchors {
+                    left: parent.left
+                    bottom: parent.bottom
                 }
-
-                MouseArea {
-                    anchors.fill: parent
-
-                    onClicked: details.visible = !details.visible
-                }
+                labelText: "Details"
+                onClicked: details.visible = !details.visible
             }
         }
     }
