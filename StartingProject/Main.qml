@@ -149,6 +149,27 @@ Window {
         }
     }
 
+    component ToggleButton: Button {
+        id: toggleButton
+
+        height: 40
+        width: height/5 + height
+
+        property alias imageSource: imageID.source
+
+        Image {
+            id: imageID
+
+            anchors {
+                fill: toggleButton
+                margins: 8
+            }
+
+            fillMode: Image.PreserveAspectFit
+        }
+    }
+
+
     QtObject {
         id: tvControl
 
@@ -245,6 +266,38 @@ Window {
         radius: 10
 
         height: 100
+    }
+
+    Row {
+        id: toggleButtons
+
+        anchors {
+            top: displayScreen.bottom
+            margins: 20
+            horizontalCenter: parent.horizontalCenter
+        }
+
+        spacing: 5
+
+        ToggleButton {
+            id: captionButton
+            imageSource: "./images/closed_caption_white.svg"
+        }
+
+        ToggleButton {
+            id: hdrButton
+            imageSource: "./images/hdr_on_white.svg"
+        }
+
+        ToggleButton {
+            id: castButton
+            imageSource: "./images/cast_white.svg"
+        }
+
+        ToggleButton {
+            id: muteButton
+            imageSource: "./images/speaker_muted_white.svg"
+        }
     }
 
 }
