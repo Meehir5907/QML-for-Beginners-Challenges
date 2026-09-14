@@ -220,5 +220,12 @@ Window {
         color: "darkred"
 
         onClicked: window.close()
+
+        Image {
+            id: power_logo
+            source: "./images/power.svg"
+            anchors.fill: parent
+            anchors.margins: 10
+        }
     }
 }

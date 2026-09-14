@@ -8,6 +8,8 @@ find_package(Qt6 REQUIRED COMPONENTS Quick)
 
 qt_standard_project_setup(REQUIRES 6.5)
 
+file(GLOB image_assets RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "images/*.svg")
+
 qt_add_executable(appIntroToQtQuick
     main.cpp
 )
@@ -18,6 +20,7 @@ qt_add_qml_module(appIntroToQtQuick
     QML_FILES
         Main.qml
     RESOURCES
+        ${image_assets}
     # TODO: add the resources you want to use
     # some are provided already in the images and fonts folders
 )
