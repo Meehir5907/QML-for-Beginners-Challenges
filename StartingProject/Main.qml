@@ -228,4 +228,23 @@ Window {
             anchors.margins: 10
         }
     }
+
+    DoubleBorderGradient {
+        id: displayScreen
+
+        anchors{
+            top: powerButton.bottom
+            left: parent.left
+            right: parent.right
+
+            margins: 20
+        }
+
+        color: "#83a72f"
+
+        radius: 10
+
+        height: 100
+    }
+
 }
