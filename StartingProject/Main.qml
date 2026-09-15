@@ -167,6 +167,23 @@ Window {
 
             fillMode: Image.PreserveAspectFit
         }
+
+        containmentMask: QtObject {
+            function contains(clickPoint: point) : bool {
+                return (
+                    Math.pow(
+                        Math.max(
+                            0,
+                            toggleButton.radius - clickPoint.x,
+                            clickPoint.x - toggleButton.width + toggleButton.radius
+                        ),
+                        2
+                    ) +
+                    Math.pow(clickPoint.y - toggleButton.radius, 2)
+                    < Math.pow(toggleButton.radius, 2)
+                )
+            }
+        }
     }
 
 
