@@ -125,6 +125,19 @@ Window {
             gesturePolicy: TapHandler.WithinBounds
             onTapped: button.clicked()
         }
+
+        property alias imageSource: imageID.source
+
+        Image {
+            id: imageID
+
+            anchors {
+                fill: parent
+                margins: 8
+            }
+
+            fillMode: Image.PreserveAspectFit
+        }
     }
 
     component CircleButton: Button {
@@ -154,19 +167,6 @@ Window {
 
         height: 40
         width: height/5 + height
-
-        property alias imageSource: imageID.source
-
-        Image {
-            id: imageID
-
-            anchors {
-                fill: toggleButton
-                margins: 8
-            }
-
-            fillMode: Image.PreserveAspectFit
-        }
 
         containmentMask: QtObject {
             function contains(clickPoint: point) : bool {
@@ -259,12 +259,7 @@ Window {
 
         onClicked: window.close()
 
-        Image {
-            id: power_logo
-            source: "./images/power.svg"
-            anchors.fill: parent
-            anchors.margins: 10
-        }
+        imageSource: "./images/power.svg"
     }
 
     DoubleBorderGradient {
