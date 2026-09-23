@@ -3,6 +3,7 @@ pragma ComponentBehavior: Bound
 // from inside any component declarations in this file
 
 import QtQuick
+import QtQuick.Shapes
 
 Window {
     id: window
@@ -126,7 +127,7 @@ Window {
             onTapped: button.clicked()
         }
 
-        property alias imageSource: imageID.source
+        property alias imageNode: imageID
 
         Image {
             id: imageID
@@ -185,7 +186,6 @@ Window {
             }
         }
     }
-
 
     QtObject {
         id: tvControl
@@ -259,7 +259,7 @@ Window {
 
         onClicked: window.close()
 
-        imageSource: "./images/power.svg"
+        imageNode.source: "./images/power.svg"
     }
 
     DoubleBorderGradient {
@@ -293,23 +293,230 @@ Window {
 
         ToggleButton {
             id: captionButton
-            imageSource: "./images/closed_caption_white.svg"
+            imageNode.source: "./images/closed_caption_white.svg"
         }
 
         ToggleButton {
             id: hdrButton
-            imageSource: "./images/hdr_on_white.svg"
+            imageNode.source: "./images/hdr_on_white.svg"
         }
 
         ToggleButton {
             id: castButton
-            imageSource: "./images/cast_white.svg"
+            imageNode.source: "./images/cast_white.svg"
         }
 
         ToggleButton {
             id: muteButton
-            imageSource: "./images/speaker_muted_white.svg"
+            imageNode.source: "./images/speaker_muted_white.svg"
         }
     }
+
+    Item {
+        id: traversalButtons
+
+        anchors {
+            top: toggleButtons.bottom
+            topMargin: 20
+            horizontalCenter: parent.horizontalCenter
+        }
+
+        width: 200
+        height: 200
+
+        Item {
+            id: rotatedButtons
+            anchors.fill: parent
+            rotation: 45
+
+            Item {
+                id: playPauseButton
+
+                anchors {
+                    right: parent.right
+                    bottom: parent.bottom
+                }
+
+                width: 100
+                height: width
+
+                clip: true
+
+                CircleButton {
+                    id: playPauseCircle
+
+                    anchors {
+                        horizontalCenter: parent.left
+                        verticalCenter: parent.top
+                    }
+
+                    rotation: -45
+
+                    imageNode.anchors.fill: undefined
+                    imageNode.anchors.margins: undefined
+
+                    imageNode.anchors.bottom: playPauseCircle.bottom
+                    imageNode.anchors.bottomMargin: 10
+                    imageNode.anchors.horizontalCenter: playPauseCircle.horizontalCenter
+
+                    imageNode.width: 32
+                    imageNode.height: 32
+                    imageNode.source: "./images/play_pause.svg"
+                }
+            }
+
+            Item {
+                id: fastRewindButton
+
+                anchors {
+                    left: parent.left
+                    bottom: parent.bottom
+                }
+
+                width: 100
+                height: width
+
+                clip: true
+
+                CircleButton {
+                    id: fastRewindCircle
+
+                    anchors {
+                        horizontalCenter: parent.right
+                        verticalCenter: parent.top
+                    }
+
+                    rotation: -45
+
+                    imageNode.anchors.fill: undefined
+                    imageNode.anchors.margins: undefined
+
+                    imageNode.anchors.left: fastRewindCircle.left
+                    imageNode.anchors.leftMargin: 10
+                    imageNode.anchors.verticalCenter: fastRewindCircle.verticalCenter
+
+                    imageNode.width: 32
+                    imageNode.height: imageNode.width
+
+                    imageNode.source: "./images/fast_rewind.svg"
+                }
+            }
+
+            Item {
+                id: settingsButton
+
+                anchors {
+                    top: parent.top
+                    left: parent.left
+                }
+
+                width: 100
+                height: width
+
+                clip: true
+
+                CircleButton {
+                    id: settingsCircle
+
+                    anchors {
+                        horizontalCenter: parent.right
+                        verticalCenter: parent.bottom
+                    }
+
+                    rotation: -45
+
+                    imageNode.anchors.fill: undefined
+                    imageNode.anchors.margins: undefined
+
+                    imageNode.anchors.top: settingsCircle.top
+                    imageNode.anchors.horizontalCenter: settingsCircle.horizontalCenter
+
+                    imageNode.anchors.topMargin: 10
+
+                    imageNode.width: 32
+                    imageNode.height: imageNode.width
+
+                    imageNode.source: "./images/settings.svg"
+                }
+            }
+
+            Item {
+                id: fastForwardButton
+
+                anchors {
+                    top: parent.top
+                    right: parent.right
+                }
+
+                width: 100
+                height: width
+
+                clip: true
+
+                CircleButton {
+                    id: fastForwardCircle
+
+                    anchors {
+                        horizontalCenter: parent.left
+                        verticalCenter: parent.bottom
+                    }
+
+                    rotation: -45
+
+                    imageNode.anchors.fill: undefined
+                    imageNode.anchors.margins: undefined
+
+                    imageNode.anchors.right: fastForwardCircle.right
+                    imageNode.anchors.verticalCenter: fastForwardCircle.verticalCenter
+
+                    imageNode.anchors.leftMargin: 10
+
+                    imageNode.width: 32
+                    imageNode.height: imageNode.width
+
+                    imageNode.source: "./images/fast_forward.svg"
+                }
+            }
+
+            BorderGradient {
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                    verticalCenter: parent.verticalCenter
+                    margins: 2
+                }
+                height: 2
+            }
+
+            BorderGradient {
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                    verticalCenter: parent.verticalCenter
+                    margins: 2
+                }
+                height: 2
+
+                rotation: 90
+            }
+        }
+
+        CircleButton {
+            id: micButton
+
+            anchors.centerIn: parent
+            width: 100
+            height: width
+
+            imageNode.anchors.fill: undefined
+            imageNode.anchors.margins: undefined
+            imageNode.anchors.centerIn: micButton
+
+            imageNode.width: 48
+            imageNode.height: 48
+            imageNode.source: "./images/mic_white.svg"
+        }
+    }
+
 
 }
