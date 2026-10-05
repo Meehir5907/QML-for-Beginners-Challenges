@@ -187,6 +187,83 @@ Window {
         }
     }
 
+    component RockerButton: DoubleBorderGradient {
+        id: rockerButton
+
+        height: 200
+        width: height/4
+        radius: width/2
+
+        signal clickUp
+        signal clickDown
+
+        property alias upImg: upButton.upImgSrc
+        property alias downImg: downButton.downImgSrc
+
+        MouseArea {
+            id: upButton
+
+            anchors {
+                top: parent.top
+                bottom: parent.verticalCenter
+                right: parent.right
+                left: parent.left
+            }
+
+            onClicked:  rockerButton.clickUp()
+
+            property alias upImgSrc: upImg.source
+
+            Image {
+                id: upImg
+
+                anchors{
+                    top: parent.top
+                    horizontalCenter: parent.horizontalCenter
+                    margins: 20
+                }
+
+                height: 32
+                width:  height
+
+                fillMode: Image.PreserveAspectFit
+            }
+        }
+
+        MouseArea {
+            id: downButton
+
+            anchors{
+                top: parent.verticalCenter
+                bottom: parent.bottom
+                right: parent.right
+                left: parent.left
+            }
+
+            onClicked: rockerButton.clickDown()
+
+            property alias downImgSrc: downImg.source
+
+            Image {
+                id: downImg
+
+                anchors{
+                    bottom: parent.bottom
+                    horizontalCenter: parent.horizontalCenter
+                    margins: 20
+                }
+
+                height: 32
+                width:  height
+
+                fillMode: Image.PreserveAspectFit
+            }
+        }
+
+        color: upButton.pressed || downButton.pressed ? window.themeColor : window.themeColor.darker()
+        color2: upButton.pressed || downButton.pressed ? window.themeColor.darker() : window.themeColor
+    }
+
     QtObject {
         id: tvControl
 
@@ -518,5 +595,33 @@ Window {
         }
     }
 
+    RockerButton {
+        id: channelUpAndDown
 
+        anchors {
+            bottom: parent.bottom
+            left: parent.left
+
+            margins: 35
+            bottomMargin: 40
+        }
+
+        upImg: "./images/plus.svg"
+        downImg: "./images/minus.svg"
+    }
+
+    RockerButton {
+        id: volumeButton
+
+        anchors {
+            bottom: parent.bottom
+            right: parent.right
+
+            margins: 35
+            bottomMargin: 40
+        }
+
+        upImg: "./images/volume_up.svg"
+        downImg: "./images/volume_down.svg"
+    }
 }
