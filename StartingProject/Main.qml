@@ -472,6 +472,8 @@ Window {
                 anchors {
                     right:  volumeValueDisplay.left
                     bottom: parent.bottom
+
+                    rightMargin: 5
                 }
 
                 source: `./images/speaker${tvControl.soundOn ? "" : "_muted.svg"}`
