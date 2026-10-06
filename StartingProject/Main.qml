@@ -366,6 +366,8 @@ Window {
         Item {
             id: displayScreenContents
 
+            opacity: 0.7
+
             anchors {
                 fill: parent
 
@@ -498,7 +500,6 @@ Window {
                 height: 80
 
                 border {
-                    color: "black"
                     width: 1
                 }
 
