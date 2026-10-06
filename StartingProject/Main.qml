@@ -496,6 +496,8 @@ Window {
 
                 color: "transparent"
 
+                opacity: tvControl.soundOn ? 1.0 : 0.5
+
                 width:  12
                 height: 80
 
