@@ -273,6 +273,7 @@ Window {
         // There are even 5 channels with sample channelNames.
 
         property int channelNumber: 0
+        readonly property string channelNumberString: `Channel ${channelNumber.toString().padStart(2, "0")}`
         readonly property string channelName: channelNames[channelNumber]
 
         // TV Features
@@ -308,6 +309,12 @@ Window {
             "Cartoons",
             "Reality TV"
         ]
+    }
+
+    FontLoader {
+        id: silkscreenRegular
+
+        source: "./fonts/Silkscreen/Silkscreen-Regular.ttf"
     }
 
     // Here we provide a suggested remote control background
@@ -355,6 +362,108 @@ Window {
         radius: 10
 
         height: 100
+
+        Item {
+            id: displayScreenContents
+
+            anchors {
+                fill: parent
+            }
+
+            Text {
+                id: channelNumberText
+
+                anchors {
+                    top: parent.top
+                    left: parent.left
+                }
+
+                font {
+                    family: silkscreenRegular.font.family
+
+                    pixelSize: 20
+                }
+
+                text: tvControl.channelNumberString
+            }
+
+            Text {
+                id: channelNameText
+
+                anchors {
+                    top: channelNumberText.bottom
+                }
+
+                font {
+                    family: silkscreenRegular.font.family
+
+                    pixelSize: 15
+                }
+
+                text: tvControl.channelName
+            }
+
+            Row {
+                id: toggleStatusIcons
+
+                anchors {
+                    bottom: parent.bottom
+                    left: parent.left
+                }
+
+                Image {
+                    id: captionStatus
+
+                    source: "./images/closed_caption.svg"
+
+                    height: 32
+                    width: 32
+
+                    visible: tvControl.closedCaptionsEnabled
+
+                    fillMode: Image.PreserveAspectFit
+                }
+
+                Image {
+                    id: hdrEnabledStatus
+
+                    source: "./images/hdr_on.svg"
+
+                    height: 32
+                    width: 32
+
+                    visible: tvControl.hdrEnabled
+
+                    fillMode: Image.PreserveAspectFit
+                }
+
+                Image {
+                    id: castConnectedStatus
+
+                    source: "./images/cast_connected.svg"
+
+                    height: 32
+                    width: 32
+
+                    visible: tvControl.castConnected
+
+                    fillMode: Image.PreserveAspectFit
+                }
+
+                Image {
+                    id: mutedStatus
+
+                    source: "./images/speaker_muted.svg"
+
+                    height: 32
+                    width: 32
+
+                    visible: tvControl.muted
+
+                    fillMode: Image.PreserveAspectFit
+                }
+            }
+        }
     }
 
     Row {
@@ -371,21 +480,29 @@ Window {
         ToggleButton {
             id: captionButton
             imageNode.source: "./images/closed_caption_white.svg"
+
+            onClicked: tvControl.closedCaptionsEnabled = !tvControl.closedCaptionsEnabled
         }
 
         ToggleButton {
             id: hdrButton
             imageNode.source: "./images/hdr_on_white.svg"
+
+            onClicked: tvControl.hdrEnabled = !tvControl.hdrEnabled
         }
 
         ToggleButton {
             id: castButton
             imageNode.source: "./images/cast_white.svg"
+
+            onClicked: tvControl.castConnected = !tvControl.castConnected
         }
 
         ToggleButton {
             id: muteButton
             imageNode.source: "./images/speaker_muted_white.svg"
+
+            onClicked: tvControl.muted = !tvControl.muted
         }
     }
 
@@ -608,6 +725,9 @@ Window {
 
         upImg: "./images/plus.svg"
         downImg: "./images/minus.svg"
+
+        onClickUp: tvControl.incrementChannel()
+        onClickDown: tvControl.decrementChannel()
     }
 
     RockerButton {
@@ -623,5 +743,8 @@ Window {
 
         upImg: "./images/volume_up.svg"
         downImg: "./images/volume_down.svg"
+
+        onClickUp: tvControl.incrementVolume()
+        onClickDown: tvControl.decrementVolume()
     }
 }
