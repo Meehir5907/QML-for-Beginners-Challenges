@@ -464,17 +464,22 @@ Window {
 
                     fillMode: Image.PreserveAspectFit
                 }
+            }
 
-                Image {
-                    id: mutedStatus
+            Image {
+                id: mutedStatus
 
-                    source: `./images/speaker${tvControl.soundOn ? "" : "_muted.svg"}`
-
-                    height: 32
-                    width: 32
-
-                    fillMode: Image.PreserveAspectFit
+                anchors {
+                    right:  volumeValueDisplay.left
+                    bottom: parent.bottom
                 }
+
+                source: `./images/speaker${tvControl.soundOn ? "" : "_muted.svg"}`
+
+                height: 32
+                width: 32
+
+                fillMode: Image.PreserveAspectFit
             }
 
             Rectangle {
