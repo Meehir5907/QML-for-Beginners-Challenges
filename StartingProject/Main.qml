@@ -368,6 +368,8 @@ Window {
 
             anchors {
                 fill: parent
+
+                margins: 5
             }
 
             Text {
@@ -419,7 +421,7 @@ Window {
                     height: 32
                     width: 32
 
-                    visible: tvControl.closedCaptionsEnabled
+                    opacity: tvControl.closedCaptionsEnabled ? 1.0 : 0.0
 
                     fillMode: Image.PreserveAspectFit
                 }
@@ -432,7 +434,7 @@ Window {
                     height: 32
                     width: 32
 
-                    visible: tvControl.hdrEnabled
+                    opacity: tvControl.hdrEnabled ? 1.0 : 0.0
 
                     fillMode: Image.PreserveAspectFit
                 }
@@ -445,7 +447,20 @@ Window {
                     height: 32
                     width: 32
 
-                    visible: tvControl.castConnected
+                    opacity: tvControl.castConnected ? 1.0 : 0.0
+
+                    fillMode: Image.PreserveAspectFit
+                }
+
+                Image {
+                    id: listeningStatus
+
+                    source: "./images/mic.svg"
+
+                    height: 32
+                    width: 32
+
+                    opacity: tvControl.listening ? 1.0 : 0.0
 
                     fillMode: Image.PreserveAspectFit
                 }
@@ -453,14 +468,43 @@ Window {
                 Image {
                     id: mutedStatus
 
-                    source: "./images/speaker_muted.svg"
+                    source: `./images/speaker${tvControl.soundOn ? "" : "_muted.svg"}`
 
                     height: 32
                     width: 32
 
-                    visible: tvControl.muted
-
                     fillMode: Image.PreserveAspectFit
+                }
+            }
+
+            Rectangle {
+                id: volumeValueDisplay
+
+                anchors {
+                    right:  parent.right
+                    verticalCenter: parent.verticalCenter
+                }
+
+                color: "transparent"
+
+                width:  12
+                height: 80
+
+                border {
+                    color: "black"
+                    width: 1
+                }
+
+                Rectangle {
+
+                    anchors {
+                        bottom: parent.bottom
+                    }
+
+                    color: "black"
+
+                    width: parent.width
+                    height: tvControl.volume * parent.height
                 }
             }
         }
@@ -709,6 +753,8 @@ Window {
             imageNode.width: 48
             imageNode.height: 48
             imageNode.source: "./images/mic_white.svg"
+
+            onPressedChanged: tvControl.listening = pressed
         }
     }
 
