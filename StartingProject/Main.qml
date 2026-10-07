@@ -172,22 +172,22 @@ Window {
         containmentMask: QtObject {
             function contains(clickPoint: point) : bool {
                 return (
-                    Math.pow(
-                        Math.max(
-                            0,
-                            toggleButton.radius - clickPoint.x,
-                            clickPoint.x - toggleButton.width + toggleButton.radius
-                        ),
-                        2
-                    ) +
-                    Math.pow(clickPoint.y - toggleButton.radius, 2)
-                    < Math.pow(toggleButton.radius, 2)
-                )
+                            Math.pow(
+                                Math.max(
+                                    0,
+                                    toggleButton.radius - clickPoint.x,
+                                    clickPoint.x - toggleButton.width + toggleButton.radius
+                                    ),
+                                2
+                                ) +
+                            Math.pow(clickPoint.y - toggleButton.radius, 2)
+                            < Math.pow(toggleButton.radius, 2)
+                            )
             }
         }
     }
 
-    component RockerButton: DoubleBorderGradient {
+    component RockerButton: Rectangle {
         id: rockerButton
 
         height: 200
@@ -260,8 +260,18 @@ Window {
             }
         }
 
-        color: upButton.pressed || downButton.pressed ? window.themeColor : window.themeColor.darker()
-        color2: upButton.pressed || downButton.pressed ? window.themeColor.darker() : window.themeColor
+        property color topColor: upButton.pressed ? window.themeColor.darker(1.4) : window.themeColor
+        property color bottomColor: downButton.pressed ? window.themeColor.darker(1.4) : window.themeColor
+
+        border {
+            width: 2
+            color: window.themeColor.darker(1.6)
+        }
+
+        gradient: Gradient {
+            GradientStop { position: 0.0; color: rockerButton.topColor }
+            GradientStop { position: 1.0; color: rockerButton.bottomColor}
+        }
     }
 
     QtObject {
