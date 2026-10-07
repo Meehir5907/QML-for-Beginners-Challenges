@@ -9,7 +9,9 @@ Window {
     width: 240
     height: 740
     visible: true
-    color: "black"
+
+    color: "transparent"
+    flags: Qt.Window | Qt.FramelessWindowHint
 
     // the window provides a themeColor property which you
     // may use wherever you need to refer to the same color
@@ -297,6 +299,10 @@ Window {
         anchors.fill: parent
         innerMargin: 8
         radius: 40
+
+        DragHandler {
+            onActiveChanged: if (active) window.startSystemMove()
+        }
     }
 
     // As a demonstration of one of the Button types,
