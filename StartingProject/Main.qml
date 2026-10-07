@@ -1,6 +1,4 @@
 pragma ComponentBehavior: Bound
-// for permitting access to window.themeColor
-// from inside any component declarations in this file
 
 import QtQuick
 import QtQuick.Shapes
@@ -8,41 +6,6 @@ import QtQuick.Shapes
 Window {
     id: window
 
-    /* Your solution should contain these key features:
-
-    - Add a Window with dimensions which resemble the kind of
-      remote control shape you want
-
-    - Using components from the Qt Quick module such as Text,
-      Image, Rectangle and any other components you want to use
-      in your design, construct your shape, colors and layout of
-      the elements you need.
-
-    - You should include a number of Buttons providing features
-      such as Volume +/-, Mute, Channel +/-, Power on/off, and
-      perhaps even some cursor arrows.
-
-    - Add image resources to your project and use them in your
-      design and try to show how the image URL might be changed
-      using bindings inside a string template expression.
-
-    - Add a font to your project and use a FontLoader to be able
-      to use the font in your Text components.
-
-    - Create re-usable items using inline components adding any
-      "required" properties where necessary
-
-    - Using bindings and signal handlers to connect your UI
-      elements to the provided tvControl object (below) so that
-      interacting with your Buttons for example, could change
-      the visible, enabled, or color of some of the other
-      elements based on the changed state of the tvControl
-      object’s properties.
-
-    */
-
-    // Here we have chosen a reasonable shape for your
-    // remote control, but feel free to design your own.
     width: 240
     height: 740
     visible: true
