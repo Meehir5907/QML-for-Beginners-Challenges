@@ -19,7 +19,7 @@ Page {
         }
 
         background: Rectangle {
-            color: "#55FFFFFF"
+            color: "#44888888"
         }
     }
 }
