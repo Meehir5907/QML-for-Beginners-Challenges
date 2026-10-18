@@ -24,6 +24,11 @@ ApplicationWindow {
 
     width: 450
     height: 750
+    minimumWidth: width
+    maximumWidth: width
+    minimumHeight: height
+    maximumHeight: height
+
     visible: true
     title: qsTr("Ahji-Bhaji")
 
