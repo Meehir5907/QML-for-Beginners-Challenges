@@ -25,7 +25,11 @@ ApplicationWindow {
     width: 640
     height: 480
     visible: true
-    title: qsTr("Your Restaurant Name")
+    title: qsTr("Ahji-Bhaji")
 
     color: "black"
+
+    MenuPage {
+        anchors.fill: parent
+    }
 }

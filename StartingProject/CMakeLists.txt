@@ -17,6 +17,7 @@ qt_add_qml_module(appIntroToQtQuickControls
     VERSION 1.0
     QML_FILES
         Main.qml
+        MenuPage.qml
     RESOURCES
     # TODO: add the resources you want to use
     # some are provided already in the images and fonts folders
